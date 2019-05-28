@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Book Shop</title>
+    <link rel="stylesheet" href="lib/bootstrap/bootstrap.css" />
+    <link rel="stylesheet" href="css/shop.css" />
+</head>
+
+<body>
+    <button onclick="onOpenAddModal()" type="button" class="Add">Add Book</button>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th onclick="onSortByName()" scope="col">Name</th>
+                <th onclick="onSortByPrice()" scope="col">Price</th>
+                <th scope="col"></th>
+                <th scope="col">Rate</th>
+                <th scope="col">Actions</th>
+
+
+            </tr>
+        </thead>
+        <tbody class="innerTable">
+
+
+        </tbody>
+
+    </table>
+
+
+    <div class="modal modalInfo" tabindex="-1" role="dialog">
+    </div>
+
+    <div class="modal modalUpdate" tabindex="-1" role="dialog">
+    </div>
+
+    <div class="modal modalAdd " tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Book</h5>
+                    <button type="button" onclick="onCloseModal()" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Book name</label>
+                            <input type="text" class="form-control newBookName" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
+
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Book Price</label>
+                            <input type="number" class="form-control newBookPrice" id="exampleInputPassword1" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Book Image</label>
+                            <input type="text" class="form-control newBookImg" id="exampleInputPassword1" placeholder="ie: img/imgName.png">
+
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onclick="onCloseModal()" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button onclick="onAddBook()" type="button" class="btn btn-primary">Add Book</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button class="nextPage" onclick="onNextPage()">Next page</button>
+    <button class="prevPage" onclick="onPrevPage()">Previus page</button>
+
+
+    <script src="lib/jquery/jquery.js "></script>
+    <script src="js/shop-service.js"></script>
+    <script src="js/shop.js"></script>
+    <script src="js/util.js "></script>
+
+</body>
+
+</html>
