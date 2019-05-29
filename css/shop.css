@@ -1,4 +1,14 @@
+body {
+    width: 100vw;
+    height: 100vh;
+}
+
 .img-thumbnail {
     max-width: 20vw;
     max-height: 20vh;
+}
+
+.table {
+    font-size: 1em;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }

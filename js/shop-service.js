@@ -23,7 +23,8 @@ function createBook(id, name, price, img) {
 }
 
 function deleteBook(bookId) {
-    gBooks.splice(bookId - 1, 1);
+    var bookIdx = findBookIDById(bookId);
+    gBooks.splice(bookIdx, 1);
     saveToStorage('books', gBooks);
 }
 
@@ -102,4 +103,12 @@ function getBooks() {
     var fromIdx = gCurrPageIdx * PAGE_SIZE;
     var books = gBooks.slice(fromIdx, fromIdx + PAGE_SIZE);
     return books;
+}
+
+function updatePrice(bookid) {
+    var book = findBookIDById(bookid);
+    if (!$('.updateBookPrice').val()) gBooks[book].price = gBooks[book].price;
+    else gBooks[book].price = $('.updateBookPrice').val();
+    onCloseModal();
+    saveToStorage('books', gBooks);
 }

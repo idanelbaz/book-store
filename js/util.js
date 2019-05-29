@@ -8,8 +8,26 @@ function getRandomIntInclusive(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive 
 }
 
+function findBookIDById(bookid) {
+    var bookIdx = gBooks.findIndex(function(book) {
+        return book.id === bookid;
+    })
+
+    return bookIdx;
+}
+
 function findBookById(bookid) {
-    return gBooks[bookid - 1];
+    var book = gBooks.find(function(book) {
+        return book.id === bookid;
+    })
+
+    return book;
+}
+
+function findBooksLength() {
+    var length = gBooks.length;
+
+    return length;
 }
 
 function findCurrPage() {

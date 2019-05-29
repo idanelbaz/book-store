@@ -13,7 +13,8 @@ function init() {
 
 
 function renderBooks() {
-    if (gBooks.length >= 3) $('.nextPage').show();
+    if (findBooksLength() >= 5) $('.nextPage').show();
+    else $('.nextPage').hide();
     var strHtml = '';
     var books = getBooks();
 
@@ -72,7 +73,7 @@ function onOpenModal(bookId) {
 
             </div>
             <div class="modal-footer">
-                <button type="button" onclick="onCloseModal()"  class="btn btn-secondary" data-dismiss="modal">Close</button>
+              
                 <button onclick="onCloseModal()" type="button" class="btn btn-primary">Save changes</button>
 
             </div>
@@ -140,6 +141,7 @@ function onAddBook() {
     addBook(newBookName, newBookPrice, newBookImg)
     onCloseModal();
     clearValueAdd();
+
 }
 
 function readAndUpdateBook(bookId) {
@@ -156,14 +158,17 @@ function readAndUpdateBook(bookId) {
             </div>
             <div class="modal-body">
                 <p> Price: ${book.price}</p>
-                
+                <div class="form-group">
+                            <label for="exampleInputPassword1">Update the price</label>
+                            <input type="number" class="form-control updateBookPrice" id="exampleInputPassword1" placeholder="${book.price}">
+                        </div>
                 <p> Id: ${book.id}</p>
                 <img src=" ${book.imgUrl}" alt="" class="img-thumbnail">
 
             </div>
             <div class="modal-footer">
                 <button type="button" onclick="onCloseModal()"  class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button onclick="onCloseModal()" type="button" class="btn btn-primary">Save changes</button>
+                <button onclick="updatePrice( ${book.id})" type="button" class="btn btn-primary">Save changes</button>
 
             </div>
         </div>
