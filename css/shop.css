@@ -3,12 +3,37 @@ body {
     height: 100vh;
 }
 
+body.rtl {
+    direction: rtl;
+    text-align: right;
+}
+
 .img-thumbnail {
     max-width: 20vw;
     max-height: 20vh;
 }
 
-.table {
-    font-size: 1em;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+.nextPage {
+    margin-right: 1em;
+}
+
+.fill {
+    font-size: 80%;
+}
+
+.header {
+    text-align: center;
+}
+
+.btn-secondary {
+    margin-right: 0.5em;
+}
+
+.Add {
+    float: right;
+    margin-left: 80%;
+}
+
+.choose {
+    margin-right: 0.5em;
 }

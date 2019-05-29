@@ -7,7 +7,6 @@ $(document).ready(init);
 function init() {
     createBooks();
     renderBooks()
-    $('.nextPage').hide();
     $('.prevPage').hide();
 }
 
@@ -23,24 +22,26 @@ function renderBooks() {
         strHtml += `   <tr>
         <th scope="row">${books[i].id}</th>
         <td>${books[i].name}</td>
-        <td>${books[i].price}</td>
-        <td><img src=" ${books[i].imgUrl}" alt="" class="img-thumbnail"> </td>
+        <td>$ ${books[i].price}</td>
+        <td><img src="${books[i].imgUrl}" alt="" class="img-thumbnail"> </td>
         <td>${books[i].rate}</td>
         <td> <div class="btn-group" role="group" aria-label="Basic example">
-        <button type="button" onclick="onOpenModal(${books[i].id})" class="btn btn-secondary">Read</button>
-        <button type="button" onclick="readAndUpdateBook (${books[i].id})" class="btn btn-secondary">Update</button>
-        <button type="button" onclick="onDeleteBook( ${books[i].id})" class="btn btn-secondary">Delete</button>
+        <button  data-trans="read"  type="button" onclick="onOpenModal(${books[i].id})" class="btn btn-secondary">Read</button>
+        <button  data-trans="update"  type="button" onclick="readAndUpdateBook (${books[i].id})" class="btn btn-secondary">Update</button>
+        <button  data-trans="delete"  type="button" onclick="onDeleteBook( ${books[i].id})" class="btn btn-secondary">Delete</button>
         </div> </td>
     </tr> 
    `
 
     }
     $('.innerTable').html(strHtml);
+    doTrans();
 }
 
 function onDeleteBook(bookId) {
     deleteBook(bookId);
     renderBooks();
+
 }
 
 
@@ -61,20 +62,17 @@ function onOpenModal(bookId) {
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">${book.name}</h5>
-                <button type="button" onclick="onCloseModal()" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
             </div>
             <div class="modal-body">
-                <p> Price: ${book.price}</p>
-                <p> Id: ${book.id}</p>
-                <p> Rate: <button onclick="onAddRate(${book.id})"  type="button" class="btn btn-light">+</button> ${book.rate} <button onclick="OnDecreaseRate(${book.id})" type="button" class="btn btn-light">-</button></p>
+                <p><span data-trans="price"> Price </span>: $ ${book.price}</p>
+                <p><span data-trans="id"> Id </span>: ${book.id}</p>
+                <span data-trans="rateAction"> Rate </span>  <p><button onclick="onAddRate(${book.id})"  type="button" class="btn btn-light">+</button> ${book.rate} <button onclick="OnDecreaseRate(${book.id})" type="button" class="btn btn-light">-</button></p>
                 <img src=" ${book.imgUrl}" alt="" class="img-thumbnail">
 
             </div>
             <div class="modal-footer">
               
-                <button onclick="onCloseModal()" type="button" class="btn btn-primary">Save changes</button>
+                <button  data-trans="saveChange"  onclick="onCloseModal()" type="button" class="btn btn-primary">Save changes</button>
 
             </div>
         </div>
@@ -83,6 +81,7 @@ function onOpenModal(bookId) {
 
     $('.modalInfo').html(strHtml);
     $('.modalInfo').show();
+    doTrans();
 
 }
 
@@ -138,10 +137,13 @@ function onAddBook() {
     var newBookName = $('.newBookName').val();
     var newBookPrice = $('.newBookPrice').val();
     var newBookImg = $('.newBookImg').val();
-    addBook(newBookName, newBookPrice, newBookImg)
-    onCloseModal();
-    clearValueAdd();
-
+    if (!newBookName || !newBookPrice) {
+        alert('Did not fill correctly')
+    } else {
+        addBook(newBookName, newBookPrice, newBookImg)
+        onCloseModal();
+        clearValueAdd();
+    }
 }
 
 function readAndUpdateBook(bookId) {
@@ -157,18 +159,18 @@ function readAndUpdateBook(bookId) {
           </button>
             </div>
             <div class="modal-body">
-                <p> Price: ${book.price}</p>
+              
                 <div class="form-group">
-                            <label for="exampleInputPassword1">Update the price</label>
+                            <label data-trans="updatePrice" for="exampleInputPassword1">Update the price</label>
                             <input type="number" class="form-control updateBookPrice" id="exampleInputPassword1" placeholder="${book.price}">
                         </div>
-                <p> Id: ${book.id}</p>
+             
                 <img src=" ${book.imgUrl}" alt="" class="img-thumbnail">
 
             </div>
             <div class="modal-footer">
-                <button type="button" onclick="onCloseModal()"  class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button onclick="updatePrice( ${book.id})" type="button" class="btn btn-primary">Save changes</button>
+                <button data-trans="close" type="button" onclick="onCloseModal()"  class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button data-trans="saveChange" onclick="updatePrice( ${book.id})" type="button" class="btn btn-primary">Save changes</button>
 
             </div>
         </div>
@@ -177,5 +179,14 @@ function readAndUpdateBook(bookId) {
 
     $('.modalUpdate').html(strHtml);
     $('.modalUpdate').show();
+    doTrans();
 
+}
+
+function onSetLang(lang) {
+    setLang(lang);
+    if (lang === 'he') {
+        document.body.classList.add('rtl');
+    } else document.body.classList.remove('rtl');
+    doTrans();
 }

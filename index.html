@@ -9,17 +9,24 @@
 </head>
 
 <body>
-    <button onclick="onOpenAddModal()" type="button" class="Add">Add Book</button>
 
+    <h2 data-trans="title" class="header">Book Store Manager</h2>
+    <button data-trans="add" onclick="onOpenAddModal()" type="button" class="Add">Add Book</button>
+
+    <span data-trans="choose" class="choose">Choose language</span> <select class="select" onchange="onSetLang(this.value)">
+            <option value="en">English</option>
+            <option value="he">עברית</option>
+            <option value="es">Spanish</option>
+        </select>
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">Id</th>
-                <th onclick="onSortByName()" scope="col">Name</th>
-                <th onclick="onSortByPrice()" scope="col">Price</th>
+                <th scope="col">#</th>
+                <th data-trans="name" onclick="onSortByName()" scope="col">Name</th>
+                <th data-trans="price" onclick="onSortByPrice()" scope="col">Price</th>
                 <th scope="col"></th>
-                <th scope="col">Rate</th>
-                <th scope="col">Actions</th>
+                <th data-trans="rate" scope="col">Rate</th>
+                <th data-trans="actions" scope="col">Actions</th>
 
 
             </tr>
@@ -42,42 +49,44 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Add Book</h5>
+                    <h5 data-trans="add" class="modal-title">Add Book</h5>
                     <button type="button" onclick="onCloseModal()" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
                 <div class="modal-body">
                     <form>
+
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Book name</label>
+                            <label data-trans="bookName" for="exampleInputEmail1">*  Book name</label>
                             <input type="text" class="form-control newBookName" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
 
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Book Price</label>
+                            <label data-trans="bookPrice" for="exampleInputPassword1">*  Book Price</label>
                             <input type="number" class="form-control newBookPrice" id="exampleInputPassword1" placeholder="">
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Book Image</label>
+                            <label data-trans="bookImage" for="exampleInputPassword1">Book Image</label>
                             <input type="text" class="form-control newBookImg" id="exampleInputPassword1" placeholder="ie: img/imgName.png">
 
                         </div>
-
+                        <p data-trans="mustFill" class="fill">* Must fill</p>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" onclick="onCloseModal()" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button onclick="onAddBook()" type="button" class="btn btn-primary">Add Book</button>
+                    <button data-trans="close" type="button" onclick="onCloseModal()" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button data-trans="add" onclick="onAddBook()" type="button" class="btn btn-primary">Add Book</button>
                 </div>
             </div>
         </div>
     </div>
-    <button class="nextPage" onclick="onNextPage()">Next page</button>
-    <button class="prevPage" onclick="onPrevPage()">Previus page</button>
+    <button data-trans="nextPage" class="nextPage" onclick="onNextPage()">Next page</button>
+    <button data-trans="previousPage" class="prevPage" onclick="onPrevPage()">Previus page</button>
 
 
     <script src="lib/jquery/jquery.js "></script>
+    <script src="js/i18n-service.js"></script>
     <script src="js/shop-service.js"></script>
     <script src="js/shop.js"></script>
     <script src="js/util.js "></script>
